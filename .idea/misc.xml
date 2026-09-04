@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/retailsync-api/pom.xml" />
         <option value="$PROJECT_DIR$/electric-bug-order-lambda/pom.xml" />
+        <option value="$PROJECT_DIR$/electric-bug-stock-lambda/pom.xml" />
+        <option value="$PROJECT_DIR$/electric-bug-marker-lambda/pom.xml" />
+        <option value="$PROJECT_DIR$/electric-bug-vehicle-lambda/pom.xml" />
+        <option value="$PROJECT_DIR$/electric-bug-customer-lambda/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="19" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="temurin-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>

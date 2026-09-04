@@ -1,4 +1,4 @@
-package com.aximly.electricbug.stock.config;
+package com.aximly.electricbug.customer.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI stockServiceOpenApi() {
+    public OpenAPI customerServiceOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Electric Bug — Stock Service")
-                        .description("Stock lookup API, synced from AAA POS")
+                        .title("Electric Bug — Customer Service")
+                        .description("Customer lookup API, synced from AAA POS")
                         .version("v1"));
     }
 }

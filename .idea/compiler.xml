@@ -8,16 +8,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="retailsync-api" />
         <module name="electric-bug-order-lambda" />
+        <module name="electric-bug-vehicle-lambda" />
+        <module name="electric-bug-stock-lambda" />
+        <module name="electric-bug-marker-lambda" />
+        <module name="electric-bug-customer-lambda" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="electric-bug-order-lambda" target="19" />
-      <module name="retailsync-api" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="electric-bug-customer-lambda" options="-parameters" />
+      <module name="electric-bug-marker-lambda" options="-parameters" />
       <module name="electric-bug-order-lambda" options="-parameters" />
+      <module name="electric-bug-stock-lambda" options="-parameters" />
+      <module name="electric-bug-vehicle-lambda" options="-parameters" />
       <module name="retailsync-api" options="-parameters" />
     </option>
   </component>

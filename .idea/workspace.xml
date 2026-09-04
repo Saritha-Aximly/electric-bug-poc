@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="982b64e4-63d8-4e31-b61f-75eadf8bc4ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/electric-bug-order-lambda/src/main/java/com/aximly/electricbug/order/config/OpenApiConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/src/main/java/com/aximly/electricbug/stock/config/OpenApiConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/retailsync-api/src/main/java/com/aximly/retailsync_api/config/OpenApiConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsonSchemas.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/java/com/aximly/electricbug/customer/ElectricBugCustomerLambdaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/java/com/aximly/electricbug/customer/ElectricBugCustomerLambdaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/java/com/aximly/electricbug/customer/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/java/com/aximly/electricbug/customer/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-customer-lambda/src/test/java/com/aximly/electricbug/customer/ElectricBugCustomerLambdaApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-customer-lambda/src/test/java/com/aximly/electricbug/customer/ElectricBugCustomerLambdaApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/src/main/java/com/aximly/electricbug/marker/MarkerLambdaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/src/main/java/com/aximly/electricbug/marker/MarkerLambdaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-marker-lambda/src/test/java/com/aximly/electricbug/marker/ElectricBugMarkerLambdaApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-marker-lambda/src/test/java/com/aximly/electricbug/marker/ElectricBugMarkerLambdaApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-order-lambda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-order-lambda/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-order-lambda/src/main/java/com/aximly/electricbug/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-order-lambda/src/main/java/com/aximly/electricbug/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/src/main/java/com/aximly/electricbug/stock/StockLambdaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/src/main/java/com/aximly/electricbug/stock/StockLambdaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/src/main/java/com/aximly/electricbug/stock/controller/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/src/main/java/com/aximly/electricbug/stock/controller/StockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-stock-lambda/src/test/java/com/aximly/electricbug/stock/ElectricBugStockLambdaApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-stock-lambda/src/test/java/com/aximly/electricbug/stock/ElectricBugStockLambdaApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/java/com/aximly/electricbug/vehicle/ElectricBugVehicleLambdaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/java/com/aximly/electricbug/vehicle/ElectricBugVehicleLambdaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/java/com/aximly/electricbug/vehicle/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/java/com/aximly/electricbug/vehicle/controller/VehicleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/test/java/com/aximly/electricbug/vehicle/ElectricBugVehicleLambdaApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/electric-bug-vehicle-lambda/src/test/java/com/aximly/electricbug/vehicle/ElectricBugVehicleLambdaApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retailsync-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/retailsync-api/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0790994201027152E-9" />
+      <entry key="MS500" value="0.02721108636754473" />
+      <entry key="S2" value="0.8903309647411249" />
+      <entry key="S5" value="2.1131852925982817" />
+      <entry key="S10" value="2.9890145140402278" />
+      <entry key="S30" value="5.004664185078582" />
+      <entry key="S60" value="7.00961566482782" />
+      <entry key="M2" value="10.033196544607337" />
+      <entry key="M5" value="15.329565315026759" />
+      <entry key="M10" value="18.80868488371692" />
+      <entry key="M15" value="20.323746749832896" />
+      <entry key="M30" value="22.15684043794513" />
+      <entry key="H1" value="23.340750254598614" />
+      <entry key="H2" value="24.08225714734412" />
+      <entry key="H4" value="24.513747793132236" />
+      <entry key="D1" value="24.914582465459667" />
+      <entry key="W1" value="24.987681907034588" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000000668539" />
+      <entry key="S10" value="1.0000081772774059" />
+      <entry key="S30" value="1.0210974953168561" />
+      <entry key="S60" value="1.1727836135087293" />
+      <entry key="M2" value="1.5523782028051056" />
+      <entry key="M5" value="2.1754395396411033" />
+      <entry key="M10" value="2.528829184378061" />
+      <entry key="M15" value="2.6709707013360022" />
+      <entry key="M30" value="2.8275067822158357" />
+      <entry key="H1" value="2.9116543621298705" />
+      <entry key="H2" value="2.955288750264544" />
+      <entry key="H4" value="2.977508017514189" />
+      <entry key="D1" value="2.9962322472329523" />
+      <entry key="W1" value="2.9994612801433522" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.2302462141890175E-8" />
+      <entry key="MS500" value="0.052605795841494885" />
+      <entry key="S2" value="1.2881223550255543" />
+      <entry key="S5" value="2.8037877034410825" />
+      <entry key="S10" value="3.8135250743306144" />
+      <entry key="S30" value="5.937961018792946" />
+      <entry key="S60" value="8.117431996515696" />
+      <entry key="M2" value="11.537051523823841" />
+      <entry key="M5" value="17.476689425220062" />
+      <entry key="M10" value="21.320914257541858" />
+      <entry key="M15" value="22.9829839796554" />
+      <entry key="M30" value="24.97806701873514" />
+      <entry key="H1" value="26.24911349633657" />
+      <entry key="H2" value="27.035847151059397" />
+      <entry key="H4" value="27.49038986017906" />
+      <entry key="D1" value="27.910667706796055" />
+      <entry key="W1" value="27.987122114891264" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="3IrZgzWjvQa760BdD2fQ4tlqQIW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.RetailsyncApiApplication">
+    <configuration name="ElectricBugCustomerLambdaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="electric-bug-customer-lambda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.electricbug.customer.ElectricBugCustomerLambdaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ElectricBugVehicleLambdaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="electric-bug-vehicle-lambda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.electricbug.vehicle.ElectricBugVehicleLambdaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarkerLambdaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="electric-bug-marker-lambda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.electricbug.marker.MarkerLambdaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderLambdaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="electric-bug-order-lambda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.electricbug.order.OrderLambdaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RetailsyncApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="retailsync-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.retailsync_api.RetailsyncApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockLambdaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="electric-bug-stock-lambda" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.aximly.electricbug.stock.StockLambdaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="982b64e4-63d8-4e31-b61f-75eadf8bc4ed" name="Changes" comment="" />
+      <created>1788524764829</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1788524764829</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
