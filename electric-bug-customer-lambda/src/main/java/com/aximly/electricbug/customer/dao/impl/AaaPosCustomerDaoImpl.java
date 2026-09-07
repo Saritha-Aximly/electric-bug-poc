@@ -31,4 +31,22 @@ public class AaaPosCustomerDaoImpl implements CustomerDao {
         return aaaPosWebClient.get().uri("/customers/" + id).retrieve()
                 .bodyToMono(CustomerDto.class).block();
     }
+
+    @Override
+    public CustomerDto createCustomer(CustomerDto customer) {
+        throw new UnsupportedOperationException(
+                "Creating customers via AAA POS API is not supported — customer records are managed in AAA POS directly.");
+    }
+
+    @Override
+    public boolean updateCustomer(CustomerDto customer) {
+        throw new UnsupportedOperationException(
+                "Updating customers via AAA POS API is not supported — customer records are managed in AAA POS directly.");
+    }
+
+    @Override
+    public boolean deleteCustomer(int id) {
+        throw new UnsupportedOperationException(
+                "Deleting customers via AAA POS API is not supported — customer records are managed in AAA POS directly.");
+    }
 }
