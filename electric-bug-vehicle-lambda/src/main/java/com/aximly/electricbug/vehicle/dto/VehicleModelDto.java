@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VehicleModelDto {
     private Integer modelId;
+    private Integer makeId;
     private String modelName;
 }

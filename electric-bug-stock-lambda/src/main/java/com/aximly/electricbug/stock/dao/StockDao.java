@@ -11,4 +11,7 @@ public interface StockDao {
     Optional<StockDto> getStockByBarcode(String barcode);
     List<StockDto> searchStock(String query);
     List<StockDto> getStockByDept(Integer deptId);
+    StockDto createStock(StockDto stock);
+    boolean updateStock(StockDto stock);
+    boolean deleteStock(Integer stockId);
 }

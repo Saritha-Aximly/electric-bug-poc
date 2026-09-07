@@ -7,5 +7,12 @@ import java.util.List;
 
 public interface VehicleService {
     List<VehicleMakeDto> getAllMakes();
-    List<VehicleModelDto> getModelsForMake(String makeName);
+    VehicleMakeDto createMake(VehicleMakeDto make);
+    boolean updateMake(Integer makeId, VehicleMakeDto make);
+    boolean deleteMake(Integer makeId);
+
+    List<VehicleModelDto> getModelsForMake(String make);
+    VehicleModelDto createModel(VehicleModelDto model);
+    boolean updateModel(Integer modelId, VehicleModelDto model);
+    boolean deleteModel(Integer modelId);
 }

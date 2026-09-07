@@ -41,4 +41,20 @@ public class StockServiceImpl implements StockService {
     public List<StockDto> getStockByDept(Integer deptId) {
         return stockDao.getStockByDept(deptId);
     }
+
+    @Override
+    public StockDto createStock(StockDto stock) {
+        return stockDao.createStock(stock);
+    }
+
+    @Override
+    public boolean updateStock(Integer stockId, StockDto stock) {
+        stock.setStockId(stockId);
+        return stockDao.updateStock(stock);
+    }
+
+    @Override
+    public boolean deleteStock(Integer stockId) {
+        return stockDao.deleteStock(stockId);
+    }
 }

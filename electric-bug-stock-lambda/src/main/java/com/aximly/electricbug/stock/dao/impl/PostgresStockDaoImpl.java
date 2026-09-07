@@ -7,11 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,9 +41,7 @@ public class PostgresStockDaoImpl implements StockDao {
         try (Connection conn = cloudDataSource.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM stock ORDER BY description")) {
-            while (rs.next()) {
-                list.add(mapRow(rs));
-            }
+            while (rs.next()) list.add(mapRow(rs));
         } catch (SQLException e) {
             throw new RuntimeException("Failed to read stock from Postgres: " + e.getMessage(), e);
         }
@@ -60,9 +54,7 @@ public class PostgresStockDaoImpl implements StockDao {
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM stock WHERE stock_id = ?")) {
             ps.setInt(1, stockId);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return Optional.of(mapRow(rs));
-                }
+                if (rs.next()) return Optional.of(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to read stock from Postgres: " + e.getMessage(), e);
@@ -76,9 +68,7 @@ public class PostgresStockDaoImpl implements StockDao {
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM stock WHERE barcode = ?")) {
             ps.setString(1, barcode);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return Optional.of(mapRow(rs));
-                }
+                if (rs.next()) return Optional.of(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to read stock from Postgres: " + e.getMessage(), e);
@@ -96,9 +86,7 @@ public class PostgresStockDaoImpl implements StockDao {
             ps.setString(1, pattern);
             ps.setString(2, pattern);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    list.add(mapRow(rs));
-                }
+                while (rs.next()) list.add(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to search stock in Postgres: " + e.getMessage(), e);
@@ -113,13 +101,65 @@ public class PostgresStockDaoImpl implements StockDao {
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM stock WHERE dept_id = ? ORDER BY description")) {
             ps.setInt(1, deptId);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    list.add(mapRow(rs));
-                }
+                while (rs.next()) list.add(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Failed to read stock from Postgres: " + e.getMessage(), e);
         }
         return list;
+    }
+
+    @Override
+    public StockDto createStock(StockDto stock) {
+        String sql = "INSERT INTO stock (barcode, description, sell_price, cost_price, quantity, dept_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = cloudDataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, stock.getBarcode());
+            ps.setString(2, stock.getDescription());
+            ps.setBigDecimal(3, stock.getSellPrice());
+            ps.setBigDecimal(4, stock.getCostPrice());
+            ps.setInt(5, stock.getQuantity() != null ? stock.getQuantity() : 0);
+            if (stock.getDeptId() != null) ps.setInt(6, stock.getDeptId());
+            else ps.setNull(6, Types.INTEGER);
+            ps.executeUpdate();
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) stock.setStockId(keys.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to insert stock into Postgres: " + e.getMessage(), e);
+        }
+        return stock;
+    }
+
+    @Override
+    public boolean updateStock(StockDto stock) {
+        String sql = "UPDATE stock SET barcode = ?, description = ?, sell_price = ?, cost_price = ?, " +
+                "quantity = ?, dept_id = ? WHERE stock_id = ?";
+        try (Connection conn = cloudDataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, stock.getBarcode());
+            ps.setString(2, stock.getDescription());
+            ps.setBigDecimal(3, stock.getSellPrice());
+            ps.setBigDecimal(4, stock.getCostPrice());
+            ps.setInt(5, stock.getQuantity() != null ? stock.getQuantity() : 0);
+            if (stock.getDeptId() != null) ps.setInt(6, stock.getDeptId());
+            else ps.setNull(6, Types.INTEGER);
+            ps.setInt(7, stock.getStockId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to update stock in Postgres: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public boolean deleteStock(Integer stockId) {
+        try (Connection conn = cloudDataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM stock WHERE stock_id = ?")) {
+            ps.setInt(1, stockId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to delete stock from Postgres: " + e.getMessage(), e);
+        }
     }
 }

@@ -11,4 +11,7 @@ public interface StockService {
     Optional<StockDto> getStockByBarcode(String barcode);
     List<StockDto> searchStock(String query);
     List<StockDto> getStockByDept(Integer deptId);
+    StockDto createStock(StockDto stock);
+    boolean updateStock(Integer stockId, StockDto stock);
+    boolean deleteStock(Integer stockId);
 }

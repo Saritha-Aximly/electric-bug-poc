@@ -1,5 +1,6 @@
 package com.aximly.electricbug.stock.controller;
 
+import com.aximly.electricbug.stock.dto.StockDto;
 import com.aximly.electricbug.stock.service.StockService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,6 +52,26 @@ public class StockController {
     @Operation(summary = "Get stock items for a department")
     public ResponseEntity<?> getByDept(@PathVariable Integer deptId) {
         return ResponseEntity.ok(stockService.getStockByDept(deptId));
+    }
+
+    @PostMapping
+    @Operation(summary = "Create a new stock item")
+    public ResponseEntity<?> createStock(@RequestBody StockDto stock) {
+        return ResponseEntity.ok(stockService.createStock(stock));
+    }
+
+    @PutMapping("/{stockId}")
+    @Operation(summary = "Update an existing stock item")
+    public ResponseEntity<?> updateStock(@PathVariable Integer stockId, @RequestBody StockDto stock) {
+        boolean updated = stockService.updateStock(stockId, stock);
+        return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{stockId}")
+    @Operation(summary = "Delete a stock item")
+    public ResponseEntity<?> deleteStock(@PathVariable Integer stockId) {
+        boolean deleted = stockService.deleteStock(stockId);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/health")
