@@ -1,13 +1,16 @@
 package com.aximly.electricbug.stock.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import javax.sql.DataSource;
 
 @Configuration
+@ConditionalOnProperty(name = "externalApiFlag", havingValue = "false", matchIfMissing = true)
 public class CloudDataSourceConfig {
 
     @Value("${cloud.datasource.url}")
@@ -24,11 +27,21 @@ public class CloudDataSourceConfig {
 
     @Bean(name = "cloudDataSource")
     public DataSource cloudDataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName(driverClassName);
-        ds.setUrl(url);
-        ds.setUsername(username);
-        ds.setPassword(password);
-        return ds;
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
+        config.setDriverClassName(driverClassName);
+
+        // Lambda-tuned: small pool, fail fast, recycle before Lambda freezes mid-connection
+        config.setMaximumPoolSize(2);
+        config.setMinimumIdle(0);
+        config.setConnectionTimeout(5000);
+        config.setIdleTimeout(30000);
+        config.setMaxLifetime(270000);
+        config.setPoolName("cloud-pool");
+        config.setInitializationFailTimeout(-1);
+
+        return new HikariDataSource(config);
     }
 }
