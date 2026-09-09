@@ -1,0 +1,14 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "electric-bug-job-lambda"
+resolve_s3 = true
+s3_prefix = "electric-bug-job-lambda"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "CloudDbUrl=\"jdbc:postgresql://aaapos-cloud.ce1mywy2cv9d.us-east-1.rds.amazonaws.com:5432/retailsync_cloud?connectTimeout=5&socketTimeout=10\" CloudDbUser=\"postgres\" CloudDbPassword=\"nrST3hfnyreVwX7LoUUv\""
+image_repositories = []
+
+[default.global.parameters]
+region = "us-east-1"
