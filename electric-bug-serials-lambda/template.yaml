@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  CloudDbUrl:
+    Type: String
+  CloudDbUser:
+    Type: String
+  CloudDbPassword:
+    Type: String
+    NoEcho: true
+
+Resources:
+  SerialsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: electric-bug-serials-lambda
+      CodeUri: .
+      Handler: com.aximly.electricbug.serials.StreamLambdaHandler::handleRequest
+      Runtime: java21
+      MemorySize: 512
+      Timeout: 30
+      Environment:
+        Variables:
+          CLOUD_DB_URL: !Ref CloudDbUrl
+          CLOUD_DB_USER: !Ref CloudDbUser
+          CLOUD_DB_PASSWORD: !Ref CloudDbPassword
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
