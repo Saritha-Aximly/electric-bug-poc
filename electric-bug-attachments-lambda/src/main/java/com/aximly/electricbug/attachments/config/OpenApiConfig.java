@@ -12,8 +12,8 @@ public class OpenApiConfig {
     public OpenAPI vehicleDetailsOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Electric Bug — Job Vehicle Details Service")
-                        .description("Vehicle details section of a job sheet")
+                        .title("Electric Bug — Job Attachments Service")
+                        .description("Attachments section of a job sheet")
                         .version("v1"));
     }
 }
