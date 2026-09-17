@@ -23,8 +23,8 @@ public class JobInstallationMarkerServiceImpl implements JobInstallationMarkerSe
     }
 
     @Override
-    public Optional<JobInstallationMarkerDto> getMarkerById(Integer id) {
-        return markerDao.getMarkerById(id);
+    public Optional<JobInstallationMarkerDto> getMarker(Integer jobId, String markerId) {
+        return markerDao.getMarker(jobId, markerId);
     }
 
     @Override
@@ -33,13 +33,19 @@ public class JobInstallationMarkerServiceImpl implements JobInstallationMarkerSe
     }
 
     @Override
-    public boolean updateMarker(Integer id, JobInstallationMarkerDto marker) {
-        marker.setId(id);
+    public boolean updateMarker(Integer jobId, String markerId, JobInstallationMarkerDto marker) {
+        marker.setJobId(jobId);
+        marker.setMarkerId(markerId);
         return markerDao.updateMarker(marker);
     }
 
     @Override
-    public boolean deleteMarker(Integer id) {
-        return markerDao.deleteMarker(id);
+    public boolean deleteMarker(Integer jobId, String markerId) {
+        return markerDao.deleteMarker(jobId, markerId);
+    }
+
+    @Override
+    public void deleteAllForJob(Integer jobId) {
+        markerDao.deleteAllForJob(jobId);
     }
 }

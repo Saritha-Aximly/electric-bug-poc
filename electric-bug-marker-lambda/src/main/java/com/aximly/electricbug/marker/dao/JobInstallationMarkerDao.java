@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface JobInstallationMarkerDao {
     List<JobInstallationMarkerDto> getMarkersForJob(Integer jobId);
-    Optional<JobInstallationMarkerDto> getMarkerById(Integer id);
+    Optional<JobInstallationMarkerDto> getMarker(Integer jobId, String markerId);
     JobInstallationMarkerDto createMarker(JobInstallationMarkerDto marker);
     boolean updateMarker(JobInstallationMarkerDto marker);
-    boolean deleteMarker(Integer id);
+    boolean deleteMarker(Integer jobId, String markerId);
+    void deleteAllForJob(Integer jobId);
 }

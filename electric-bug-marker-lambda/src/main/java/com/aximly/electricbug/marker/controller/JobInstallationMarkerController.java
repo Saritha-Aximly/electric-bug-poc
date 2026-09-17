@@ -2,10 +2,10 @@ package com.aximly.electricbug.marker.controller;
 
 import com.aximly.electricbug.marker.dto.JobInstallationMarkerDto;
 import com.aximly.electricbug.marker.service.JobInstallationMarkerService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -26,6 +26,14 @@ public class JobInstallationMarkerController {
         return ResponseEntity.ok(markerService.getMarkersForJob(jobId));
     }
 
+    @GetMapping("/{markerId}")
+    @Operation(summary = "Get a specific marker on a job's diagram")
+    public ResponseEntity<?> getMarker(@PathVariable Integer jobId, @PathVariable String markerId) {
+        return markerService.getMarker(jobId, markerId)
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     @Operation(summary = "Place a new marker on a job's diagram")
     public ResponseEntity<?> createMarker(@PathVariable Integer jobId, @RequestBody JobInstallationMarkerDto marker) {
@@ -34,22 +42,29 @@ public class JobInstallationMarkerController {
     }
 
     @PutMapping("/{markerId}")
-    @Operation(summary = "Edit a specific marker on a job's diagram")
-    public ResponseEntity<?> updateMarker(@PathVariable Integer jobId, @PathVariable Integer markerId,
-                                           @RequestBody JobInstallationMarkerDto marker) {
-        boolean updated = markerService.updateMarker(markerId, marker);
+    @Operation(summary = "Update a specific marker on a job's diagram")
+    public ResponseEntity<?> updateMarker(@PathVariable Integer jobId, @PathVariable String markerId,
+                                          @RequestBody JobInstallationMarkerDto marker) {
+        boolean updated = markerService.updateMarker(jobId, markerId, marker);
         return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{markerId}")
     @Operation(summary = "Delete a specific marker on a job's diagram")
-    public ResponseEntity<?> deleteMarker(@PathVariable Integer jobId, @PathVariable Integer markerId) {
-        boolean deleted = markerService.deleteMarker(markerId);
+    public ResponseEntity<?> deleteMarker(@PathVariable Integer jobId, @PathVariable String markerId) {
+        boolean deleted = markerService.deleteMarker(jobId, markerId);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping
+    @Operation(summary = "Delete all markers for a job")
+    public ResponseEntity<?> deleteAllMarkers(@PathVariable Integer jobId) {
+        markerService.deleteAllForJob(jobId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/health")
-    @Operation(summary = "Health check on marker on job's diagram")
+    @Operation(summary = "Health check on marker service")
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity.ok(Map.of("status", "UP", "service", "electric-bug-marker-lambda"));
     }

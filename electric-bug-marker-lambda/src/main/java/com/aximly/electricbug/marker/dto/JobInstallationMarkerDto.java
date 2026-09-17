@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JobInstallationMarkerDto {
-    private Integer id;
+    private String markerId;
     private Integer jobId;
     private String markerType;
     private String label;
