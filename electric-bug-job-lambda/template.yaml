@@ -9,6 +9,8 @@ Parameters:
   CloudDbPassword:
     Type: String
     NoEcho: true
+  StateMachineArn:
+    Type: String
 
 Resources:
   JobFunction:
@@ -25,6 +27,13 @@ Resources:
           CLOUD_DB_URL: !Ref CloudDbUrl
           CLOUD_DB_USER: !Ref CloudDbUser
           CLOUD_DB_PASSWORD: !Ref CloudDbPassword
+          STATE_MACHINE_ARN: !Ref StateMachineArn
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - states:StartSyncExecution
+              Resource: !Ref StateMachineArn
       Events:
         ApiEvent:
           Type: Api

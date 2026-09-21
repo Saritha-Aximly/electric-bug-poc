@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  StateMachineLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/vendedlogs/states/create-job-sheet-workflow
+      RetentionInDays: 14
+
+  CreateJobSheetStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Name: create-job-sheet-workflow
+      DefinitionUri: statemachine/create-job-sheet.asl.json
+      Type: EXPRESS
+      Logging:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt StateMachineLogGroup.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-job-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-vehicledetails-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-servicedetails-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-instructions-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-installers-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-products-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-attachments-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-serials-lambda
+        - CloudWatchLogsFullAccess
+
+Outputs:
+  StateMachineArn:
+    Description: ARN of the job sheet creation workflow
+    Value: !Ref CreateJobSheetStateMachine

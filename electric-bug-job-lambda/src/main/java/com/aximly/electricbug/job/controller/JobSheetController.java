@@ -7,6 +7,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.beans.factory.annotation.Value;
+import software.amazon.awssdk.services.sfn.SfnClient;
+import software.amazon.awssdk.services.sfn.model.StartSyncExecutionRequest;
+import software.amazon.awssdk.services.sfn.model.StartSyncExecutionResponse;
+import software.amazon.awssdk.services.sfn.model.SyncExecutionStatus;
+
 import java.util.Map;
 
 @RestController
@@ -15,9 +21,14 @@ import java.util.Map;
 public class JobSheetController {
 
     private final JobSheetService jobSheetService;
+    private final SfnClient sfnClient;
 
-    public JobSheetController(JobSheetService jobSheetService) {
+    @Value("${jobsheet.workflow.state-machine-arn}")
+    private String stateMachineArn;
+
+    public JobSheetController(JobSheetService jobSheetService, SfnClient sfnClient) {
         this.jobSheetService = jobSheetService;
+        this.sfnClient = sfnClient;
     }
 
     @GetMapping
@@ -64,5 +75,24 @@ public class JobSheetController {
     @Operation(summary = "Health check")
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity.ok(Map.of("status", "UP", "service", "electric-bug-job-lambda"));
+    }
+
+    @PostMapping("/full")
+    @Operation(summary = "Create a full job sheet via the orchestrated workflow")
+    public ResponseEntity<?> createFullJobSheet(@RequestBody String workflowInput) {
+        StartSyncExecutionResponse response = sfnClient.startSyncExecution(
+                StartSyncExecutionRequest.builder()
+                        .stateMachineArn(stateMachineArn)
+                        .input(workflowInput)
+                        .build());
+
+        if (response.status() == SyncExecutionStatus.SUCCEEDED) {
+            return ResponseEntity.ok(response.output());
+        } else {
+            return ResponseEntity.internalServerError().body(Map.of(
+                    "error", response.error() != null ? response.error() : "Unknown",
+                    "cause", response.cause() != null ? response.cause() : "No details available"
+            ));
+        }
     }
 }
