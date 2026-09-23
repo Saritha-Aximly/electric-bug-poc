@@ -286,205 +286,291 @@
             },
             "NoAttachments": { "Type": "Pass", "End": true }
           }
+        },
+        {
+          "StartAt": "HasMarkers",
+          "States": {
+            "HasMarkers": {
+              "Type": "Choice",
+              "Choices": [
+                { "Variable": "$.markers[0]", "IsPresent": true, "Next": "CreateMarkers" }
+              ],
+              "Default": "NoMarkers"
+            },
+            "CreateMarkers": {
+              "Type": "Map",
+              "ItemsPath": "$.markers",
+              "ItemSelector": {
+                "jobId.$": "$.createdJob.jobId",
+                "marker.$": "$$.Map.Item.Value"
+              },
+              "Iterator": {
+                "StartAt": "AddMarker",
+                "States": {
+                  "AddMarker": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-marker-lambda",
+                      "Payload": {
+                        "resource": "/{proxy+}",
+                        "path.$": "States.Format('/api/jobs/{}/markers', $.jobId)",
+                        "httpMethod": "POST",
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "multiValueHeaders": {
+                          "Content-Type": ["application/json"]
+                        },
+                        "queryStringParameters": {},
+                        "multiValueQueryStringParameters": {},
+                        "pathParameters": {},
+                        "stageVariables": {},
+                        "requestContext": {
+                          "resourceId": "abc123",
+                          "resourcePath": "/{proxy+}",
+                          "httpMethod": "POST",
+                          "extendedRequestId": "test-request-id",
+                          "requestTime": "01/Jan/2026:00:00:00 +0000",
+                          "path.$": "States.Format('/Prod/api/jobs/{}/markers', $.jobId)",
+                          "accountId": "697004802551",
+                          "protocol": "HTTP/1.1",
+                          "stage": "Prod",
+                          "domainPrefix": "test",
+                          "requestTimeEpoch": 1735689600000,
+                          "requestId": "test-request-id",
+                          "identity": {
+                            "apiKey": null,
+                            "sourceIp": "127.0.0.1"
+                          },
+                          "domainName": "test.execute-api.us-east-1.amazonaws.com",
+                          "apiId": "test-api-id"
+                        },
+                        "body.$": "States.JsonToString($.marker)",
+                        "isBase64Encoded": false
+                      }
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "End": true
+            },
+            "NoMarkers": { "Type": "Pass", "End": true }
+          }
         }
       ],
       "ResultPath": "$.sectionResults",
-      "Next": "CreateInstallers",
+      "Next": "CreateRemainingSections",
       "Catch": [
         { "ErrorEquals": ["States.ALL"], "ResultPath": "$.error", "Next": "PartialCreationFailed" }
       ]
     },
-    "CreateInstallers": {
-      "Type": "Map",
-      "ItemsPath": "$.installers",
-      "ItemSelector": {
-        "jobId.$": "$.createdJob.jobId",
-        "installer.$": "$$.Map.Item.Value"
-      },
-      "Iterator": {
-        "StartAt": "AddInstaller",
-        "States": {
-          "AddInstaller": {
-            "Type": "Task",
-            "Resource": "arn:aws:states:::lambda:invoke",
-            "Parameters": {
-              "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-installers-lambda",
-              "Payload": {
-                "resource": "/{proxy+}",
-                "path.$": "States.Format('/api/jobs/{}/installers', $.jobId)",
-                "httpMethod": "POST",
-                "headers": {
-                  "Content-Type": "application/json"
-                },
-                "multiValueHeaders": {
-                  "Content-Type": ["application/json"]
-                },
-                "queryStringParameters": {},
-                "multiValueQueryStringParameters": {},
-                "pathParameters": {},
-                "stageVariables": {},
-                "requestContext": {
-                  "resourceId": "abc123",
-                  "resourcePath": "/{proxy+}",
-                  "httpMethod": "POST",
-                  "extendedRequestId": "test-request-id",
-                  "requestTime": "01/Jan/2026:00:00:00 +0000",
-                  "path.$": "States.Format('/Prod/api/jobs/{}/installers', $.jobId)",
-                  "accountId": "697004802551",
-                  "protocol": "HTTP/1.1",
-                  "stage": "Prod",
-                  "domainPrefix": "test",
-                  "requestTimeEpoch": 1735689600000,
-                  "requestId": "test-request-id",
-                  "identity": {
-                    "apiKey": null,
-                    "sourceIp": "127.0.0.1"
-                  },
-                  "domainName": "test.execute-api.us-east-1.amazonaws.com",
-                  "apiId": "test-api-id"
-                },
-                "body.$": "States.JsonToString($.installer)",
-                "isBase64Encoded": false
-              }
+    "CreateRemainingSections": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "CreateInstallers",
+          "States": {
+            "CreateInstallers": {
+              "Type": "Map",
+              "ItemsPath": "$.installers",
+              "ItemSelector": {
+                "jobId.$": "$.createdJob.jobId",
+                "installer.$": "$$.Map.Item.Value"
+              },
+              "Iterator": {
+                "StartAt": "AddInstaller",
+                "States": {
+                  "AddInstaller": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-installers-lambda",
+                      "Payload": {
+                        "resource": "/{proxy+}",
+                        "path.$": "States.Format('/api/jobs/{}/installers', $.jobId)",
+                        "httpMethod": "POST",
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "multiValueHeaders": {
+                          "Content-Type": ["application/json"]
+                        },
+                        "queryStringParameters": {},
+                        "multiValueQueryStringParameters": {},
+                        "pathParameters": {},
+                        "stageVariables": {},
+                        "requestContext": {
+                          "resourceId": "abc123",
+                          "resourcePath": "/{proxy+}",
+                          "httpMethod": "POST",
+                          "extendedRequestId": "test-request-id",
+                          "requestTime": "01/Jan/2026:00:00:00 +0000",
+                          "path.$": "States.Format('/Prod/api/jobs/{}/installers', $.jobId)",
+                          "accountId": "697004802551",
+                          "protocol": "HTTP/1.1",
+                          "stage": "Prod",
+                          "domainPrefix": "test",
+                          "requestTimeEpoch": 1735689600000,
+                          "requestId": "test-request-id",
+                          "identity": {
+                            "apiKey": null,
+                            "sourceIp": "127.0.0.1"
+                          },
+                          "domainName": "test.execute-api.us-east-1.amazonaws.com",
+                          "apiId": "test-api-id"
+                        },
+                        "body.$": "States.JsonToString($.installer)",
+                        "isBase64Encoded": false
+                      }
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "CreateProducts",
+          "States": {
+            "CreateProducts": {
+              "Type": "Map",
+              "ItemsPath": "$.products",
+              "ItemSelector": {
+                "jobId.$": "$.createdJob.jobId",
+                "product.$": "$$.Map.Item.Value"
+              },
+              "Iterator": {
+                "StartAt": "AddProduct",
+                "States": {
+                  "AddProduct": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-products-lambda",
+                      "Payload": {
+                        "resource": "/{proxy+}",
+                        "path.$": "States.Format('/api/jobs/{}/products', $.jobId)",
+                        "httpMethod": "POST",
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "multiValueHeaders": {
+                          "Content-Type": ["application/json"]
+                        },
+                        "queryStringParameters": {},
+                        "multiValueQueryStringParameters": {},
+                        "pathParameters": {},
+                        "stageVariables": {},
+                        "requestContext": {
+                          "resourceId": "abc123",
+                          "resourcePath": "/{proxy+}",
+                          "httpMethod": "POST",
+                          "extendedRequestId": "test-request-id",
+                          "requestTime": "01/Jan/2026:00:00:00 +0000",
+                          "path.$": "States.Format('/Prod/api/jobs/{}/products', $.jobId)",
+                          "accountId": "697004802551",
+                          "protocol": "HTTP/1.1",
+                          "stage": "Prod",
+                          "domainPrefix": "test",
+                          "requestTimeEpoch": 1735689600000,
+                          "requestId": "test-request-id",
+                          "identity": {
+                            "apiKey": null,
+                            "sourceIp": "127.0.0.1"
+                          },
+                          "domainName": "test.execute-api.us-east-1.amazonaws.com",
+                          "apiId": "test-api-id"
+                        },
+                        "body.$": "States.JsonToString($.product)",
+                        "isBase64Encoded": false
+                      }
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "HasSerials",
+          "States": {
+            "HasSerials": {
+              "Type": "Choice",
+              "Choices": [
+                { "Variable": "$.serialNumbers[0]", "IsPresent": true, "Next": "CreateSerials" }
+              ],
+              "Default": "NoSerials"
             },
-            "End": true
+            "CreateSerials": {
+              "Type": "Map",
+              "ItemsPath": "$.serialNumbers",
+              "ItemSelector": {
+                "jobId.$": "$.createdJob.jobId",
+                "serial.$": "$$.Map.Item.Value"
+              },
+              "Iterator": {
+                "StartAt": "AddSerial",
+                "States": {
+                  "AddSerial": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-serials-lambda",
+                      "Payload": {
+                        "resource": "/{proxy+}",
+                        "path.$": "States.Format('/api/jobs/{}/serials', $.jobId)",
+                        "httpMethod": "POST",
+                        "headers": {
+                          "Content-Type": "application/json"
+                        },
+                        "multiValueHeaders": {
+                          "Content-Type": ["application/json"]
+                        },
+                        "queryStringParameters": {},
+                        "multiValueQueryStringParameters": {},
+                        "pathParameters": {},
+                        "stageVariables": {},
+                        "requestContext": {
+                          "resourceId": "abc123",
+                          "resourcePath": "/{proxy+}",
+                          "httpMethod": "POST",
+                          "extendedRequestId": "test-request-id",
+                          "requestTime": "01/Jan/2026:00:00:00 +0000",
+                          "path.$": "States.Format('/Prod/api/jobs/{}/serials', $.jobId)",
+                          "accountId": "697004802551",
+                          "protocol": "HTTP/1.1",
+                          "stage": "Prod",
+                          "domainPrefix": "test",
+                          "requestTimeEpoch": 1735689600000,
+                          "requestId": "test-request-id",
+                          "identity": {
+                            "apiKey": null,
+                            "sourceIp": "127.0.0.1"
+                          },
+                          "domainName": "test.execute-api.us-east-1.amazonaws.com",
+                          "apiId": "test-api-id"
+                        },
+                        "body.$": "States.JsonToString($.serial)",
+                        "isBase64Encoded": false
+                      }
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "End": true
+            },
+            "NoSerials": { "Type": "Pass", "End": true }
           }
         }
-      },
-      "ResultPath": "$.installerResults",
-      "Next": "CreateProducts",
-      "Catch": [
-        { "ErrorEquals": ["States.ALL"], "ResultPath": "$.error", "Next": "PartialCreationFailed" }
-      ]
-    },
-    "CreateProducts": {
-      "Type": "Map",
-      "ItemsPath": "$.products",
-      "ItemSelector": {
-        "jobId.$": "$.createdJob.jobId",
-        "product.$": "$$.Map.Item.Value"
-      },
-      "Iterator": {
-        "StartAt": "AddProduct",
-        "States": {
-          "AddProduct": {
-            "Type": "Task",
-            "Resource": "arn:aws:states:::lambda:invoke",
-            "Parameters": {
-              "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-products-lambda",
-              "Payload": {
-                "resource": "/{proxy+}",
-                "path.$": "States.Format('/api/jobs/{}/products', $.jobId)",
-                "httpMethod": "POST",
-                "headers": {
-                  "Content-Type": "application/json"
-                },
-                "multiValueHeaders": {
-                  "Content-Type": ["application/json"]
-                },
-                "queryStringParameters": {},
-                "multiValueQueryStringParameters": {},
-                "pathParameters": {},
-                "stageVariables": {},
-                "requestContext": {
-                  "resourceId": "abc123",
-                  "resourcePath": "/{proxy+}",
-                  "httpMethod": "POST",
-                  "extendedRequestId": "test-request-id",
-                  "requestTime": "01/Jan/2026:00:00:00 +0000",
-                  "path.$": "States.Format('/Prod/api/jobs/{}/products', $.jobId)",
-                  "accountId": "697004802551",
-                  "protocol": "HTTP/1.1",
-                  "stage": "Prod",
-                  "domainPrefix": "test",
-                  "requestTimeEpoch": 1735689600000,
-                  "requestId": "test-request-id",
-                  "identity": {
-                    "apiKey": null,
-                    "sourceIp": "127.0.0.1"
-                  },
-                  "domainName": "test.execute-api.us-east-1.amazonaws.com",
-                  "apiId": "test-api-id"
-                },
-                "body.$": "States.JsonToString($.product)",
-                "isBase64Encoded": false
-              }
-            },
-            "End": true
-          }
-        }
-      },
-      "ResultPath": "$.productResults",
-      "Next": "HasSerials",
-      "Catch": [
-        { "ErrorEquals": ["States.ALL"], "ResultPath": "$.error", "Next": "PartialCreationFailed" }
-      ]
-    },
-    "HasSerials": {
-      "Type": "Choice",
-      "Choices": [
-        { "Variable": "$.serialNumbers[0]", "IsPresent": true, "Next": "CreateSerials" }
       ],
-      "Default": "JobSheetCreated"
-    },
-    "CreateSerials": {
-      "Type": "Map",
-      "ItemsPath": "$.serialNumbers",
-      "ItemSelector": {
-        "jobId.$": "$.createdJob.jobId",
-        "serial.$": "$$.Map.Item.Value"
-      },
-      "Iterator": {
-        "StartAt": "AddSerial",
-        "States": {
-          "AddSerial": {
-            "Type": "Task",
-            "Resource": "arn:aws:states:::lambda:invoke",
-            "Parameters": {
-              "FunctionName": "arn:aws:lambda:us-east-1:697004802551:function:electric-bug-serials-lambda",
-              "Payload": {
-                "resource": "/{proxy+}",
-                "path.$": "States.Format('/api/jobs/{}/serials', $.jobId)",
-                "httpMethod": "POST",
-                "headers": {
-                  "Content-Type": "application/json"
-                },
-                "multiValueHeaders": {
-                  "Content-Type": ["application/json"]
-                },
-                "queryStringParameters": {},
-                "multiValueQueryStringParameters": {},
-                "pathParameters": {},
-                "stageVariables": {},
-                "requestContext": {
-                  "resourceId": "abc123",
-                  "resourcePath": "/{proxy+}",
-                  "httpMethod": "POST",
-                  "extendedRequestId": "test-request-id",
-                  "requestTime": "01/Jan/2026:00:00:00 +0000",
-                  "path.$": "States.Format('/Prod/api/jobs/{}/serials', $.jobId)",
-                  "accountId": "697004802551",
-                  "protocol": "HTTP/1.1",
-                  "stage": "Prod",
-                  "domainPrefix": "test",
-                  "requestTimeEpoch": 1735689600000,
-                  "requestId": "test-request-id",
-                  "identity": {
-                    "apiKey": null,
-                    "sourceIp": "127.0.0.1"
-                  },
-                  "domainName": "test.execute-api.us-east-1.amazonaws.com",
-                  "apiId": "test-api-id"
-                },
-                "body.$": "States.JsonToString($.serial)",
-                "isBase64Encoded": false
-              }
-            },
-            "End": true
-          }
-        }
-      },
-      "ResultPath": "$.serialResults",
+      "ResultPath": "$.remainingResults",
       "Next": "JobSheetCreated",
       "Catch": [
         { "ErrorEquals": ["States.ALL"], "ResultPath": "$.error", "Next": "PartialCreationFailed" }

@@ -37,6 +37,8 @@ Resources:
             FunctionName: electric-bug-attachments-lambda
         - LambdaInvokePolicy:
             FunctionName: electric-bug-serials-lambda
+        - LambdaInvokePolicy:
+            FunctionName: electric-bug-marker-lambda
         - CloudWatchLogsFullAccess
 
 Outputs:

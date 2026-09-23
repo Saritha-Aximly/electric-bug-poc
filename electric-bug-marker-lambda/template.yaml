@@ -24,7 +24,7 @@ Resources:
       CodeUri: .
       Handler: com.aximly.electricbug.marker.StreamLambdaHandler::handleRequest
       Runtime: java21
-      MemorySize: 512
+      MemorySize: 1024
       Timeout: 30
       Policies:
         - DynamoDBCrudPolicy:
